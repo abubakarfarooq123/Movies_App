@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               keyboardType: TextInputType.emailAddress,
               controller: _emailController,
               focusNode: emailFocus,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Email',
                 prefixIcon: Icon(Icons.alternate_email_outlined),
               ),

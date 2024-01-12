@@ -6,15 +6,15 @@ import 'package:http/http.dart';
 import 'package:mvvm_test_app/data/app_exception.dart';
 import 'package:mvvm_test_app/data/network/baseApiServices.dart';
 
-class NetwrokApiService extends BaseApiServices {
+class NetworkApiService extends BaseApiServices {
   @override
   Future getGetApiResponse(String url) async {
     dynamic responseJson;
     try {
       final response =
-          await http.get(Uri.parse(url)).timeout(Duration(seconds: 10));
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
 
-      responseJson = retunrResponse(response);
+      responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
     }
@@ -23,13 +23,13 @@ class NetwrokApiService extends BaseApiServices {
   }
 
   @override
-  Future getPostApiRespone(String url, dynamic data) async {
+  Future getPostApiResponse(String url, dynamic data) async {
     dynamic responseJson;
     try {
       Response response =
-          await post(Uri.parse(url), body: data).timeout(Duration(seconds: 10));
+          await post(Uri.parse(url), body: data).timeout(const Duration(seconds: 10));
 
-      responseJson = retunrResponse(response);
+      responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
     }
@@ -38,7 +38,7 @@ class NetwrokApiService extends BaseApiServices {
   }
 }
 
-dynamic retunrResponse(http.Response response) {
+dynamic returnResponse(http.Response response) {
   switch (response.statusCode) {
     case 200:
       dynamic responseJson = jsonDecode(response.body);
@@ -50,7 +50,7 @@ dynamic retunrResponse(http.Response response) {
       throw BadRequestExpection(response.body.toString());
 
     default:
-      throw FetchDataException('Error Occured While Communicating with server' +
+      throw FetchDataException('Error Occurred While Communicating with server' +
           'with Status Code' +
           response.statusCode.toString());
   }
